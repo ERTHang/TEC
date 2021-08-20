@@ -1,0 +1,86 @@
+; Semi-infinite to doubly infinite states
+
+0 * * l init
+init _ £ r end
+end * * r end
+end _ ¢ l back_init
+back_init * * l back_init
+back_init £ £ r new_init
+* £ £ r *
+
+; Stop and end states
+
+; End state from state 1
+1 ¢ § r end_state_1
+end_state_1 _ ¢ l 1
+
+; Stop state from state 4
+stop_state_1 * * l 5
+
+; Stop state from state 6
+stop_state_2 * * l halt-accept
+
+; End state from state 7
+7 ¢ § r end_state_2
+end_state_2 _ ¢ l 7
+
+; Stop state from state 9
+stop_state_3 * * l halt-accept
+
+; End state from state 13
+13 ¢ § r end_state_3
+end_state_3 _ ¢ l 13
+
+; Stop state from state 13
+stop_state_4 * * l halt-accept
+
+; Machine states
+
+new_init 1 x r 1
+new_init 0 x r 7
+1 1 1 r 1
+1 0 0 r 1
+1 § § l 2
+2 0 0 l 3
+2 1 1 l 3
+3 1 1 l 4
+4 0 0 l 4
+4 1 1 l 4
+4 x 1 r stop_state_1
+5 1 1 l 6
+6 1 1 r stop_state_2
+7 0 0 r 7
+7 1 1 r 7
+7 § § l 8
+8 0 0 l 9
+8 1 1 l 9
+9 1 1 r stop_state_3
+9 0 0 l 10
+10 0 0 l 10
+10 1 1 l 10
+10 x x r 11
+11 1 x r 12
+12 0 x r 13
+13 y y r 13
+13 0 y r 14
+13 1 y r 17
+13 § § r stop_state_4
+14 0 0 r 14
+14 1 y r 15
+15 0 0 r 15
+15 1 y l 16
+16 0 0 l 16
+16 y y l 16
+16 x x r 13
+17 0 0 r 17
+17 y y r 17
+17 1 y l 18
+18 0 0 l 18
+18 y y l 18
+18 x x r 19
+19 1 1 r 19
+19 y y r 19
+19 0 y l 20
+20 1 1 l 20
+20 y y l 20
+20 x x r 13
